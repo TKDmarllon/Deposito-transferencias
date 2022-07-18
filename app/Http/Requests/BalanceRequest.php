@@ -25,4 +25,11 @@ class BalanceRequest extends AbstractRequest
             'deposit'=> 'gt:0',
         ];
     }
+
+    public function messages()
+    {
+        return[
+            'deposit.gt'=>'O valor do deposito precisa ser positivo.'
+        ];
+    }
 }

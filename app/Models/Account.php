@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
     class Account extends Model
 {
     protected $table='account';
-    protected $fillable=['fullname','cpf','cnpj','email','password','balance'];
+    protected $fillable=['fullname','type','document','email','password','balance'];
     
 }

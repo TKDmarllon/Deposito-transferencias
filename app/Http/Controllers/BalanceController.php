@@ -6,6 +6,8 @@ use App\Http\Requests\BalanceRequest;
 use App\Models\Account;
 use Illuminate\Http\JsonResponse;
 
+use function PHPSTORM_META\type;
+
 class BalanceController extends Controller
 {
     public function deposit(BalanceRequest $request)
@@ -27,9 +29,14 @@ class BalanceController extends Controller
         
         $payerObject=Account::findorfail($payer);
         $payeeObject=Account::findorfail($payee);
-        if ($payerObject->cnpj) {
-            return new JsonResponse("Transferencias só para pf.");
+        if ($payerObject['type'] == 'cnpj') {
+            return new JsonResponse("Transferencias só para CPF.");
         }
+
+        if ($value<=0) {
+            return new JsonResponse("O valor da transferência precisa ser positivo");
+        }
+
         if ($payerObject->balance < $value) {
             return new JsonResponse("saldo insuficiente.");
         } 

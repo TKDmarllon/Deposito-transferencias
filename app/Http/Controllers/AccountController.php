@@ -4,42 +4,49 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AccountRequest;
 use App\Models\Account;
+use App\Service\AccountService;
 use Illuminate\Http\JsonResponse;
 
 class AccountController extends Controller
 {
+    private $accountService;
+
+    public function __construct(
+        AccountService $accountService
+    ){
+        $this->accountService = $accountService;
+    }
 
     public function index()
     {
-        return Account::all();
+        return $this->accountService->index();
     }
 
-    public function store(AccountRequest $request)
+    public function store(AccountRequest $request):JsonResponse
     {
-        Account::create($request->validated());
-        return $request->all();
-
-    }
+        $account = new Account($request->all());
+        $accountService=$this->accountService->store($account);
+        return new JsonResponse($accountService);
+    }   
 
     public function show($id)
     {
-        $account=Account::findorfail($id);
-        return new JsonResponse($account);
+        return $this->accountService->show($id);
         
     }
 
-    public function update(AccountRequest $request, $id)
+    public function update(AccountRequest $request):JsonResponse
     {
-        $account=Account::findorfail($id);
+        $account= new Account($request->all());
+        $account=$this->accountService->
+        $this->accountService->update($account);
+        return new JsonResponse($account);
 
-        $account-> update([
-            'balance'=>$request->saldo,
-        ]);
     }
 
     public function destroy($id)
     {
-        $account=Account::destroy($id);
-        return new JsonResponse("conta exluída");
+        $this->accountService->destroy($id);
+        return new JsonResponse("conta deletada.");
     }
 }
