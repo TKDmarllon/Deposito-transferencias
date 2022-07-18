@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Http\Requests\AccountRequest;
 use App\Models\Account;
 use App\Repository\AccountRepository;
 use Illuminate\Http\JsonResponse;

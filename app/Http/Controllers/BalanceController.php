@@ -6,8 +6,6 @@ use App\Http\Requests\BalanceRequest;
 use App\Models\Account;
 use Illuminate\Http\JsonResponse;
 
-use function PHPSTORM_META\type;
-
 class BalanceController extends Controller
 {
     public function deposit(BalanceRequest $request)
