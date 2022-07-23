@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 class AccountService {
 
-    protected $customerService;
+    protected $accountService;
 
     public function __construct(
         AccountRepository $accountRepository
