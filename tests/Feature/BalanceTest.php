@@ -42,7 +42,7 @@ class BalanceTest extends TestCase
                 "deposit"=>"500"
         ]);
 
-        $response->assertStatus(404);
+        $response->assertStatus(400);
     }
 
     public function test_depositErrorValue()
