@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Rules\DocumentRule;
+use App\Rules\FullnameRequest;
 use Illuminate\Validation\Rule;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Validation\Rules\Password;
-
 
 class AccountRequest extends AbstractRequest
 {
@@ -27,17 +25,29 @@ class AccountRequest extends AbstractRequest
      * @return array<string, mixed>
      */
 
-
     public function rules()
     {
         return [
-            'class'=>['required', Rule::in('pf','pj')],
-            'cpf'=>Rule::requiredIf($this->request->get('class')=='pf'),
-            'cnpj'=>Rule::requiredIf($this->request->get('class')=='pj'),
-            'fullname'=>'required',
-            'email' => 'required|email',
+            'type'=>['required', Rule::in('cpf','cnpj')],
+            'document'=> new DocumentRule,
+            'fullname'=> new FullnameRequest,
+            'email' => 'required|email|unique:App\Models\Account,email',
             'balance'=>'required',
-            'password'=>Password::min(8)->numbers(),
+            'password' => ['required', 'confirmed', Password::min(8)],
         ];
     }
+    public function messages()
+    {
+        return[
+            'type.in'=>'O tipo de conta deve ser CPF ou CNPJ.',
+            'document.unique'=>'O número de documento já existe',
+            'fullname.min'=>'O nome precisa ter no mínimo 6 caracteres.',
+            'email.required'=>'O e-mail é obrigatório.',
+            'email.email'=>'O e-mail precisa ser válido',
+            'email.unique'=>'O email já existe',
+            'password.min'=>'O password precisa ter 8 caracteres',
+            'password'=>'O password precisa ter 8 caracteres',
+        ];
+    }
+
 }

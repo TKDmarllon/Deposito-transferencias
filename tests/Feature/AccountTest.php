@@ -19,11 +19,12 @@ class AccountTest extends TestCase
      public function test_creat()
     {
         $response = $this->post(route('conta.cadastro'),[
-            "fullname"=>Str::random(10),
-	        "cnpj"=>"4839284402",
-            'class'=>'pj',
+            "fullname"=>'conta certa',
+	        "document"=>"87654839284402",
+            'type'=>'cnpj',
             "email"=>Str::random(8)."@gmail.com",
             "password"=>'12345678',
+            "password_confirmation"=>'12345678',
             "balance"=>3000
         ]);
 
@@ -57,9 +58,9 @@ class AccountTest extends TestCase
     public function test_creatErrorName()
     {
         $response = $this->post(route('conta.cadastro'),[
-            "fullname"=>"",
-	        "cnpj"=>"4839284402",
-            'class'=>'pj',
+            "fullname"=>"erro",
+	        "document"=>"12345678909876",
+            'type'=>'cnpj',
             "email"=>Str::random(8)."@gmail.com",
             "password"=>'12345678',
             "balance"=>3000
@@ -68,12 +69,12 @@ class AccountTest extends TestCase
         $response->assertStatus(400);
     }
 
-    public function test_creatErrorClass()
+    public function test_creatErrortype()
     {
         $response = $this->post(route('conta.cadastro'),[
-            "fullname"=>"nomealeatorio",
-	        "cnpj"=>"4839284402",
-            'class'=>'cpf',
+            "fullname"=>"usuario dois",
+	        "document"=>"12343234565",
+            'type'=>'cptl',
             "email"=>Str::random(8)."@gmail.com",
             "password"=>'12345678',
             "balance"=>3000
@@ -85,9 +86,9 @@ class AccountTest extends TestCase
     public function test_creatErrorEmail()
     {
         $response = $this->post(route('conta.cadastro'),[
-            "fullname"=>"nomealeatorio",
-	        "cnpj"=>"4839284402",
-            'class'=>'cpf',
+            "fullname"=>"usuario tres",
+	        "document"=>"12343456123",
+            'type'=>'cpf',
             "email"=>Str::random(8),
             "password"=>'12345678',
             "balance"=>3000
@@ -99,9 +100,9 @@ class AccountTest extends TestCase
     public function test_creatErrorPassword()
     {
         $response = $this->post(route('conta.cadastro'),[
-            "fullname"=>"nomealeatorio",
-	        "cnpj"=>"4839284402",
-            'class'=>'cpf',
+            "fullname"=>"empresa quatro",
+	        "document"=>"98767898765654",
+            'type'=>'cnpj',
             "email"=>Str::random(8)."@gmail.com",
             "password"=>'8dm4hd8f',
             "balance"=>3000
@@ -113,9 +114,9 @@ class AccountTest extends TestCase
     public function test_creatErrorBalance()
     {
         $response = $this->post(route('conta.cadastro'),[
-            "fullname"=>"nomealeatorio",
-	        "cnpj"=>"4839284402",
-            'class'=>'cpf',
+            "fullname"=>"usuario cinco",
+	        "document"=>"19872837573",
+            'type'=>'cpf',
             "email"=>Str::random(8)."@gmail.com",
             "password"=>'12345678',
             "balance"=>""

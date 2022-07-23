@@ -18,8 +18,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('fullname');
-            $table->string('cpf')->unique()->nullable();
-            $table->string('cnpj')->unique()->nullable();
+            $table->string('type');
+            $table->string('document')->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table-> float('balance');

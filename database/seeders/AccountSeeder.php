@@ -17,24 +17,27 @@ class AccountSeeder extends Seeder
     public function run()
     {
         DB::table('account')->insert([
-            "fullname"=>Str::random(10),
-	        "cnpj"=>"222333333",
+            "fullname"=>"seed um",
+            "type"=>'cnpj',
+	        "document"=>"12312312322222",
             "email"=>Str::random(8)."@gmail.com",
             "password"=>Hash::make('password'),
             "balance"=>3000
         ]);
     
         DB::table('account')->insert([
-            "fullname"=>Str::random(10),
-	        "cpf"=>"234234323",
+            "fullname"=>"seed dois",
+            "type"=>"cpf",
+	        "document"=>"11234234323",
             "email"=>Str::random(8)."@gmail.com",
             "password"=>Hash::make('password'),
             "balance"=>3000
         ]);
 
         DB::table('account')->insert([
-            "fullname"=>Str::random(10),
-	        "cpf"=>"6242352",
+            "fullname"=>"seed tres",
+            "type"=>"cpf",
+	        "document"=>"55556242352",
             "email"=>Str::random(8)."@gmail.com",
             "password"=>Hash::make('password'),
             "balance"=>3000

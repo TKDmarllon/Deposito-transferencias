@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+
 class BalanceRequest extends AbstractRequest
 {
     /**
@@ -23,6 +24,15 @@ class BalanceRequest extends AbstractRequest
     {
         return [
             'deposit'=> 'gt:0',
+            'id'=>'exists:App\Models\Account',
+        ];
+    }
+
+    public function messages()
+    {
+        return[
+            'deposit.gt'=>'O valor do deposito precisa ser positivo.',
+            'id.exists'=>'Conta não encontrada.'
         ];
     }
 }
