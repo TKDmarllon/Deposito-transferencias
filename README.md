@@ -77,5 +77,41 @@ Devem ser enviados em formato JSON.
 ## Balance
 
   Api destinada ao controle das transações bancarias (deposito e transferência)
+  
+* Methods usados
+POST | PUT 
+
+  * Function deposit <br>
+        Method: PUT <br>
+        <i>Deposita saldo em conta<i>
+           
+                    url:api/transacao/deposito
+   
+   Body Params:
+
+Devem ser enviados em formato JSON.
+
+id=[integer] - id da conta que receberá o deposito, precisa existir no BD
+
+deposit=[string] - Valor do depósito, precisa ser maior que 0(zero)
+   <br>
+   <br>
+            
+    * Function transaction <br>
+        Method: POST <br>
+        <i>Transfere saldo de uma conta pra outra<i>
+           
+                    url:api/transacao/pagamento
+            
+    
+   Body Params:
+
+Devem ser enviados em formato JSON.
+
+payer=[integer] - id da conta que fará o depósito, precisa existir no BD
+
+payee=[integer] - id da conta que receberá o depósito, precisa existir no BD  
+ 
+value=[string] - Valor da transferência, payer precisar ter saldo > do que value, value precisa ser > 0(zero)
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
