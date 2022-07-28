@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AccountRequest;
+use App\Http\Requests\AccountUpdateRequest;
 use App\Models\Account;
 use App\Service\AccountService;
 use Illuminate\Http\JsonResponse;
@@ -35,12 +36,11 @@ class AccountController extends Controller
         
     }
 
-    public function update(AccountRequest $request):JsonResponse
+    public function update(AccountUpdateRequest $request):JsonResponse
     {
-        $account= new Account($request->all());
-        $account=$this->accountService->
-        $this->accountService->update($account);
-        return new JsonResponse($account);
+        $newAccount= new AccountUpdateRequest($request->all());
+        $newAccount=$this->accountService->update($newAccount);
+        return new JsonResponse("Conta atualizada.");
 
     }
 
