@@ -59,7 +59,7 @@ password_confirmation - required,
 
 Devem ser enviados em formato JSON.
  
- fullname=[string] - Nome do cliente, required - precisa ter ao menos 2 palavras
+ fullname=[string] - Nome do cliente, required - precisa ter ao menos 2 palavras <br>
  password(string) - required, minimo de 8 digitos
       
    <br>
