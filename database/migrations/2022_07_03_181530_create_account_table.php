@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('document')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table-> float('balance');
+            $table->float('balance')->default(0);
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Http\Requests\AccountUpdateRequest;
 use App\Models\Account;
 use App\Repository\AccountRepository;
 use Illuminate\Http\JsonResponse;
@@ -32,10 +33,10 @@ class AccountService {
         return $this->accountRepository->show($id); 
     }
 
-    public function update(Account $account):JsonResponse
+    public function update( $newAccount)
     {
-        $this->accountRepository->update($account);
-        return new JsonResponse($account);
+        $this->accountRepository->update($newAccount);
+        return $newAccount;
     }
 
     public function destroy($id)
