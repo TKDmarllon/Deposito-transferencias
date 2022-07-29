@@ -6,6 +6,7 @@ use App\Http\Requests\AccountRequest;
 use App\Http\Requests\AccountUpdateRequest;
 use App\Models\Account;
 use App\Service\AccountService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 
 class AccountController extends Controller
@@ -18,7 +19,7 @@ class AccountController extends Controller
         $this->accountService = $accountService;
     }
 
-    public function index()
+    public function index():Collection
     {
         return $this->accountService->index();
     }
@@ -26,11 +27,11 @@ class AccountController extends Controller
     public function store(AccountRequest $request):JsonResponse
     {
         $account = new Account($request->all());
-        $accountService=$this->accountService->store($account);
-        return new JsonResponse($accountService);
+        $this->accountService->store($account);
+        return new JsonResponse("Conta criada com sucesso.");
     }   
 
-    public function show($id)
+    public function show($id):Account
     {
         return $this->accountService->show($id);
         
@@ -44,7 +45,7 @@ class AccountController extends Controller
 
     }
 
-    public function destroy($id)
+    public function destroy($id):JsonResponse
     {
         $this->accountService->destroy($id);
         return new JsonResponse("conta deletada.");
