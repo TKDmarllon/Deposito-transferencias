@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Http\Requests\AccountUpdateRequest;
 use App\Models\Account;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -22,7 +21,7 @@ class AccountRepository{
     public function show($id)
     {
         return Account::findorfail($id);
-    }
+    }   
 
     public function update($newAccount)
     {

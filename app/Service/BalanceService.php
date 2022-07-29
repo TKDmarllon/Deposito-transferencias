@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Repository\BalanceRepository;
-use Illuminate\Http\JsonResponse;
 
 class BalanceService {
 
@@ -15,14 +14,13 @@ class BalanceService {
         $this->balanceRepository = $balanceRepository;
     }
 
-    public function deposit($balance)
+    public function deposit($balance):void
     {
         $this->balanceRepository->deposit($balance);
     }
 
-    public function payment($transaction)
+    public function payment($transaction):void
     {
         $balanceRepository=$this->balanceRepository->payment($transaction);
-        return new JsonResponse($balanceRepository);
     }
 }

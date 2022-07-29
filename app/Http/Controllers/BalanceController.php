@@ -15,18 +15,18 @@ class BalanceController extends Controller
     ){
         $this->balanceService = $balanceService;
     }
-    public function deposit(BalanceRequest $request)
+    public function deposit(BalanceRequest $request):JsonResponse
     {
         $balance= new BalanceRequest($request->all());
         $balance=$this->balanceService->deposit($balance);
-        return new JsonResponse($request);
+        return new JsonResponse("deposito realizado.");
 
     }
 
-    public function payment(BalanceRequest $request)
+    public function payment(BalanceRequest $request):JsonResponse
     {
         $transaction=new BalanceRequest($request->all());
         $balanceService=$this->balanceService->payment($transaction);
-        return new JsonResponse($balanceService);
+        return new JsonResponse("Transferência realizada.");
     }
 }

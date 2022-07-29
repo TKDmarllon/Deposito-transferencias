@@ -2,10 +2,10 @@
 
 namespace App\Service;
 
-use App\Http\Requests\AccountUpdateRequest;
 use App\Models\Account;
 use App\Repository\AccountRepository;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\Collection;
+
 
 class AccountService {
 
@@ -17,29 +17,27 @@ class AccountService {
         $this->accountRepository = $accountRepository;
     }
 
-    public function index()
+    public function index():Collection
     {
         return $this->accountRepository->index();
     }
 
-    public function store(Account $account)
+    public function store(Account $account):void
     {
         $this->accountRepository->store($account);
-        return $account;
     }
 
-    public function show($id)
+    public function show($id):Account
     {
         return $this->accountRepository->show($id); 
     }
 
-    public function update( $newAccount)
+    public function update( $newAccount):void
     {
         $this->accountRepository->update($newAccount);
-        return $newAccount;
     }
 
-    public function destroy($id)
+    public function destroy($id):int
     {
         return $this->accountRepository->destroy($id); 
     }
