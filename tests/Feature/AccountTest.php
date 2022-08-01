@@ -31,6 +31,17 @@ class AccountTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_update()
+    {
+        $response = $this->put(route('conta.atualizar'),[
+            "id"=>'1',
+            "fullname"=>'conta atualizada',
+            "password"=>'98765654',
+        ]);
+
+        $response->assertStatus(200);
+    }
+
     public function test_index()
     {
         $response = $this->get(route('conta.home'),[
@@ -120,6 +131,38 @@ class AccountTest extends TestCase
             "email"=>Str::random(8)."@gmail.com",
             "password"=>'12345678',
             "balance"=>""
+        ]);
+
+        $response->assertStatus(400);
+    }
+    
+    public function test_updateErrorId()
+    {
+        $response = $this->put(route('conta.atualizar'),[
+            "id"=>'0',
+            "fullname"=>"usuario cinco",
+            "password"=>'12345678',
+        ]);
+
+        $response->assertStatus(404);
+    }
+    public function test_updateErrorNane()
+    {
+        $response = $this->put(route('conta.atualizar'),[
+            "id"=>'1',
+            "fullname"=>"usuario",
+            "password"=>'12345678',
+        ]);
+
+        $response->assertStatus(400);
+    }
+
+    public function test_updateErrorPassword()
+    {
+        $response = $this->put(route('conta.atualizar'),[
+            "id"=>'1',
+            "fullname"=>"usuario",
+            "password"=>'123',
         ]);
 
         $response->assertStatus(400);

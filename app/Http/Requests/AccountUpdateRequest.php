@@ -26,8 +26,8 @@ class AccountUpdateRequest extends AbstractRequest
     {
         return [
             'id'=>'required',
-            'fullname'=> 'required',new FullnameRequest,
-            'password' =>'required',Password::min(8)
+            'fullname'=> ['required',new FullnameRequest],
+            'password' =>['required',Password::min(8)]
             //
         ];
     }
