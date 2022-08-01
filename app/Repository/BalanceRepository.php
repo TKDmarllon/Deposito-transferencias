@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 
 class BalanceRepository{ 
 
-    public function deposit($balance)
+    public function deposit($balance):void
     {
         $account=Account::findorfail($balance['id']);
         $account->update([
