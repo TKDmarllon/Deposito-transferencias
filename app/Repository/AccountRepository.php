@@ -23,15 +23,10 @@ class AccountRepository{
         return Account::findorfail($id);
     }   
 
-    public function update($newAccount)
+    public function update($account)
     {
-        $account=Account::findorfail($newAccount['id']);
+       return $account=Account::findorfail($account['id']);
         
-
-        $account-> update([
-            'password'=>$newAccount['password'],
-            'fullname'=>$newAccount['fullname']
-        ]);
     }
 
     public function destroy($id)

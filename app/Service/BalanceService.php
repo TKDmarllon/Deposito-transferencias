@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Repository\BalanceRepository;
+use Illuminate\Http\JsonResponse;
+
 
 class BalanceService {
 
@@ -16,11 +18,38 @@ class BalanceService {
 
     public function deposit($balance):void
     {
-        $this->balanceRepository->deposit($balance);
+        $account=$this->balanceRepository->deposit($balance);
+
+        $account->update([
+            'balance'=>$balance['deposit']+$account->balance
+        ]);
     }
 
-    public function payment($transaction):void
+    public function payment($transaction):JsonResponse
     {
-        $balanceRepository=$this->balanceRepository->payment($transaction);
+        $value=$transaction['value'];
+
+        $payerObject=$this->balanceRepository->paymentPayer($transaction);
+        $payeeObject=$this->balanceRepository->paymentPayee($transaction);
+        
+
+        if ($payerObject->balance < $value) {
+            return new JsonResponse("saldo insuficiente.");
+        } 
+        if ($value<=0) {
+            return new JsonResponse("O valor da transferência precisa ser positivo");
+        }
+        if ($payerObject['type'] == 'cnpj') {
+            return new JsonResponse("Transferencias só para CPF.");
+        }
+
+        $payerObject->update([
+            'balance'=>$payerObject->balance-$value
+        ]);
+        $payeeObject->update([
+            'balance'=>$payeeObject->balance+$value
+        ]);
+        return new JsonResponse("Transação efetuada.");
+
     }
 }
