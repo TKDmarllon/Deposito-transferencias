@@ -34,7 +34,12 @@ class AccountService {
 
     public function update( $newAccount):void
     {
-        $this->accountRepository->update($newAccount);
+        $account=$this->accountRepository->update($newAccount);
+
+        $account-> update([
+            'password'=>$newAccount['password'],
+            'fullname'=>$newAccount['fullname']
+        ]);
     }
 
     public function destroy($id):int

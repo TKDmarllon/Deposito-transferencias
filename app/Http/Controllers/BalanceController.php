@@ -26,7 +26,7 @@ class BalanceController extends Controller
     public function payment(BalanceRequest $request):JsonResponse
     {
         $transaction=new BalanceRequest($request->all());
-        $balanceService=$this->balanceService->payment($transaction);
-        return new JsonResponse("Transferência realizada.");
+        $transaction=$this->balanceService->payment($transaction);
+        return new JsonResponse($transaction);
     }
 }

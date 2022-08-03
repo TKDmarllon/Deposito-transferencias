@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\FullnameRequest;
+use App\Rules\FullnameRule;
 use Illuminate\Validation\Rules\Password;
 
 class AccountUpdateRequest extends AbstractRequest
@@ -26,9 +26,8 @@ class AccountUpdateRequest extends AbstractRequest
     {
         return [
             'id'=>'required',
-            'fullname'=> ['required',new FullnameRequest],
+            'fullname'=> ['required',new FullnameRule],
             'password' =>['required',Password::min(8)]
-            //
         ];
     }
     public function messages()

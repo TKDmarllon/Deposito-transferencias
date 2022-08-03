@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\DocumentRule;
-use App\Rules\FullnameRequest;
+use App\Rules\FullnameRule;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
@@ -30,7 +30,7 @@ class AccountRequest extends AbstractRequest
         return [
             'type'=>['required', Rule::in('cpf','cnpj')],
             'document'=> new DocumentRule,
-            'fullname'=> new FullnameRequest,
+            'fullname'=> new FullnameRule,
             'email' => 'required|email|unique:App\Models\Account,email',
             'password' => ['required', 'confirmed', Password::min(8)],
         ];
